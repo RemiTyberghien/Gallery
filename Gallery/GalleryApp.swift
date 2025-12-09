@@ -10,9 +10,10 @@ import SwiftUI
 @main
 struct GalleryApp: App {
     @State private var galleryDataStore = GalleryDataStore()
+    @State private var pathStore = PathStore()
     var body: some Scene {
         WindowGroup {
-            ContentView().environment(galleryDataStore).task {
+            ContentView().environment(galleryDataStore).environment(pathStore).task {
                 await galleryDataStore.loadData()
             }
         }
