@@ -16,6 +16,13 @@ struct GalleryDetailView: View {
             Text(gallery.name)
             Text(gallery.location)
             Text(gallery.website)
+            
+            List(galleryDataStore.getAllArtists(gallery: gallery), id : \.self)
+            {
+                artist in
+                Text(artist.name)
+                Text(artist.nationality)
+            }
         }
         else{
             Text("Kies een gellery")
