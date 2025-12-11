@@ -29,6 +29,16 @@ class GalleryDataStore {
         return allArtists
     }
     
+    func getAllArtworksByArtist(artist: Artist) -> [Artwork]
+    {
+        let galleries = galleries.filter{gallerij in gallerij.artists.contains(artist)}
+        let allArtists = galleries.flatMap {$0.artists}
+        let artist = allArtists.filter{artist in artist.name == artist.name}
+        let artworks = artist.flatMap {$0.artworks}
+        return artworks
+    }
+    
+    
     func loadData() async {
         //simulate async call
         do {

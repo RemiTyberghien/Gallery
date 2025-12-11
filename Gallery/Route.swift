@@ -10,5 +10,5 @@ import Foundation
 
 enum Route: Hashable {
     case artist(Artist)
-
+    case artwork(Artwork , Artist)
 }

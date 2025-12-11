@@ -15,12 +15,14 @@ struct GalleryDetailView: View {
         @Bindable var pathStore = pathStore
         if let gallery = gallery
         {
-            Text(gallery.name)
-            Text(gallery.location)
-            Text(gallery.website)
+            
             
             NavigationStack(path: $pathStore.route)
             {
+                Text(gallery.name)
+                Text(gallery.location)
+                Text(gallery.website)
+                
                 List(galleryDataStore.getAllArtists(gallery: gallery, ), id: \.self ) { artist in
                     NavigationLink(value: Route.artist(artist)) {
                         VStack{
@@ -28,12 +30,21 @@ struct GalleryDetailView: View {
                             Text(artist.nationality)
                         }
                     }
-                }.navigationTitle("artists")
-                
+                }
+                .navigationTitle("artists")
+                .navigationDestination(for: Route.self) { route in
+                    switch route {
+                    case let .artist(artist):
+                        ArtistView(artist: artist)
+                    case let .artwork(artwork ,artist):
+                        ArtworkView(artwork: artwork , artist: artist)
+                        
+                    }
+                }
             }
         }
         else{
-            Text("Kies een gellery")
+            Text("Kies een gallery")
         }
     }
 }

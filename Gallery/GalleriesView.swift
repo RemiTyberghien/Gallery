@@ -6,7 +6,16 @@ struct GalleriesView: View {
 
     var body: some View {
         List(galleryDataStore.getAllGalleries(), id: \.self, selection: $gallery) { item in
-            Text(item.name)
+            
+            VStack{
+                Text(item.name)
+                Text(item.location)
+                Text(item.description)
+                Divider()
+            }
+               
+            
+            
         }
     }
 }
